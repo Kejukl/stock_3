@@ -1,0 +1,110 @@
+<html>
+<head>
+<style>
+
+h {
+    color: darkgreen;
+        font-size: 30px;
+        font-family:Arial;
+
+} 
+p {
+    color: darkblue;
+        font-family:Arial;
+
+} 
+
+
+body {
+    background-color: lightgrey;
+            font-family:Arial;
+
+}
+button {
+    background-color: yellow;
+    font-size: 16px;  
+}
+
+</style>
+</head>
+  <body>
+    <h><b>London Stock Echange Calculator </b> </h>
+        <p> To calculate Break Even Price and </p> 
+        <p> To estimate the re entry point for rebuying the share with specified minimum gain</p>
+</br>
+    <p>Enter the number of shares, buy price, sell price and required minimum gain if you want to rebuy the shares</p>
+    <br/>Number of share units  &nbsp :
+    <input type="number" id="txt1" name="text1" value=100 step=100>
+        <br/>
+        <br/>
+
+    Buy price in Pounds &nbsp &nbsp &nbsp:
+    <input type="number" id="txt2" name="text2" value=1.00 min=0.01 step=0.01>
+    <br/>
+    <br/>
+    
+    Sell price in Pounds &nbsp &nbsp &nbsp:
+    <input type="number" id="txt3" name="text3" value=1.00 min=0.01 step=0.01>
+    <br/>
+    <br/>
+    
+    Minimum Gain for </br> Rebuying the shares &nbsp &nbsp :
+    <input type="number" id="txt4" name="text4" value=0>
+    <br/>
+    <br/>
+    
+    tax  &nbsp &nbsp :
+    <input type="number" id="txt7" name="text7" value=0.005 min=0.0 step=0.005>
+    <br/>
+    <br/>
+    
+
+    <button onclick="myFunction()">Calculate</button>
+
+    <p id="totalCost"> Here the total cost will be displayed </p>
+        <p id="breakP"> Break even price will be displayed </p>
+        <p id="SellP"> Sell Value will be displayed </p>
+        <p id="reEnter"> Required Re entry point </p>
+        <h6 id="timing" > </h6>
+        
+
+
+    <script>
+       document.getElementById("timing").innerHTML = Date();
+      function myFunction() {
+        var commission=11.95;
+        var taxi=0.005;
+        
+        var ns = document.getElementById("txt1").value;
+        var z = document.getElementById("txt2").value;
+        var sell=document.getElementById("txt3").value;
+        var ReEnterGain=document.getElementById("txt4").value;
+        var tax=document.getElementById("txt7").value;
+
+        
+        var x = (Number(ns) *Number(z)*(1+Number(tax)))+commission;
+        document.getElementById("totalCost").innerHTML = "Total cost = "+ x;
+        totalCost=x;
+        bp=(x+commission)/Number(ns)
+        
+        
+        document.getElementById("breakP").innerHTML = "Break Price = "+ bp;
+        sp=sell*Number(ns)-commission
+        gain=sp-totalCost
+
+        document.getElementById("SellP").innerHTML = "Sell value = "+sp+" with gain "+ gain.toFixed(3) +" &pound";
+        
+        nbp=(sp-ReEnterGain-commission)/((1+tax)*ns)
+        document.getElementById("reEnter").innerHTML = "ReEnter value can be equal of less than "+ Number(nbp) +" &pound for a gain of "+ReEnterGain+" &nbsp &pound" ;
+       
+
+      }      
+    </script>
+    
+    
+    
+    
+    
+    
+  </body>
+</html>
